@@ -1,6 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const db = require("./database");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
 
 const app = express();
 
@@ -92,6 +97,33 @@ app.delete("/notes/:id", (req, res) => {
       res.json({ message: "Note deleted" });
     }
   );
+});
+
+const PROMPTS = {
+  summarize: (content) => `Summarize the following note concisely:\n\n${content}`,
+  rewrite: (content) => `Rewrite the following note more clearly and concisely:\n\n${content}`,
+  improve: (content) => `Improve the grammar, style, and clarity of the following note. Return only the improved text:\n\n${content}`,
+  translate: (content) => `Translate the following note to English. Return only the translated text:\n\n${content}`,
+  generateTitle: (content) => `Generate a short, descriptive title (max 8 words) for the following note. Return only the title, no quotes:\n\n${content}`,
+};
+
+app.post("/ai", async (req, res) => {
+  const { action, content } = req.body;
+
+  if (!PROMPTS[action]) {
+    return res.status(400).json({ error: "Invalid action" });
+  }
+
+  if (!content || content.trim() === "") {
+    return res.status(400).json({ error: "Note content is empty" });
+  }
+
+  try {
+    const result = await model.generateContent(PROMPTS[action](content));
+    res.json({ result: result.response.text() });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 app.listen(5000, () => {
