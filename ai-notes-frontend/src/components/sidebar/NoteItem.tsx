@@ -5,7 +5,8 @@ import {
   Typography,
 } from "@mui/material";
 
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import DeleteSweepRoundedIcon from "@mui/icons-material/DeleteSweepRounded";
+import NoteAltOutlinedIcon from "@mui/icons-material/NoteAltOutlined";
 
 import type { Note } from "../../types";
 
@@ -39,57 +40,83 @@ export default function NoteItem({
         cursor: "pointer",
         transition: "all .25s ease",
         background: selected
-          ? "linear-gradient(135deg, rgba(99,102,241,.20), rgba(34,197,94,.12))"
-          : "rgba(255,255,255,.02)",
+          ? "linear-gradient(135deg, rgba(240,93,94,.16), rgba(8,166,166,.12))"
+          : "#f8fbf8",
         border: selected
-          ? "1px solid rgba(99,102,241,.45)"
-          : "1px solid rgba(255,255,255,.06)",
+          ? "1px solid rgba(240,93,94,.45)"
+          : "1px solid #e2ebe5",
 
         "&:hover": {
           transform: "translateY(-2px)",
-          background: "rgba(255,255,255,.05)",
-          border: "1px solid rgba(99,102,241,.25)",
+          background: "#ffffff",
+          border: "1px solid rgba(8,166,166,.30)",
+        },
+
+        "&:hover .note-delete, &:focus-within .note-delete": {
+          opacity: 1,
         },
       }}
     >
-      <Tooltip title="Delete">
-        <IconButton
-          size="small"
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete();
-          }}
-          sx={{
-            position: "absolute",
-            top: 10,
-            right: 10,
-            opacity: 0,
-            transition: ".2s",
-
-            ".MuiBox-root:hover &": {
-              opacity: 1,
-            },
-
-            "&:hover": {
-              color: "#ef4444",
-            },
-          }}
-        >
-          <DeleteOutlineRoundedIcon fontSize="small" />
-        </IconButton>
-      </Tooltip>
-
-      <Typography
+      <Box
         sx={{
-          fontWeight: 700,
-          fontSize: 16,
-          pr: 4,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 1,
           mb: 0.75,
         }}
-        noWrap
       >
-        {note.title || "Untitled"}
-      </Typography>
+        <Typography
+          sx={{
+            minWidth: 0,
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            gap: 0.8,
+            fontWeight: 700,
+            fontSize: 16,
+          }}
+          noWrap
+        >
+          <NoteAltOutlinedIcon
+            sx={{
+              color: selected ? "#f05d5e" : "#08a6a6",
+              fontSize: 18,
+              flexShrink: 0,
+            }}
+          />
+          {note.title || "Untitled"}
+        </Typography>
+
+        <Tooltip title="Delete">
+          <IconButton
+            className="note-delete"
+            size="small"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}
+            sx={{
+              flexShrink: 0,
+              width: 30,
+              height: 30,
+              opacity: 0,
+              transition: "opacity .2s, color .2s, background-color .2s",
+
+              "@media (hover: none)": {
+                opacity: 1,
+              },
+
+              "&:hover": {
+                color: "#ef4444",
+                backgroundColor: "rgba(240,93,94,.10)",
+              },
+            }}
+          >
+            <DeleteSweepRoundedIcon fontSize="small" />
+          </IconButton>
+        </Tooltip>
+      </Box>
 
       <Typography
         sx={{

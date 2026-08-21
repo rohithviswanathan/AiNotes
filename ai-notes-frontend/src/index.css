@@ -15,11 +15,9 @@
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  font: 16px/145% "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  color: #172b3a;
+  background: #f7f9f4;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -30,6 +28,7 @@
   }
 }
 
+/* MUI owns the application theme. */
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
@@ -55,7 +54,7 @@
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  border-inline: 1px solid var(--border);
+  border-inline: 1px solid #e2ebe5;
   min-height: 100svh;
   display: flex;
   flex-direction: column;

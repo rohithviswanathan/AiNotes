@@ -1,12 +1,15 @@
 import {
   Box,
+  CircularProgress,
   Divider,
   Paper,
+  Skeleton,
   Typography,
 } from "@mui/material";
 
 import type { Note } from "../../types";
 import NoteItem from "./NoteItem";
+import NotesRoundedIcon from "@mui/icons-material/NotesRounded";
 //import SearchBar from "../common/SearchBar";
 
 interface SidebarProps {
@@ -16,6 +19,7 @@ interface SidebarProps {
   onSearchChange: (value: string) => void;
   onSelect: (id: string) => void;
   onDelete: (id: string) => void;
+  loading?: boolean;
 }
 
 export default function Sidebar({
@@ -25,18 +29,20 @@ export default function Sidebar({
   //onSearchChange,
   onSelect,
   onDelete,
+  loading,
 }: SidebarProps) {
   return (
     <Paper
       elevation={0}
       sx={{
-        width: 320,
+        width: "100%",
+        maxWidth: 320,
         height: "100%",
         display: "flex",
         flexDirection: "column",
         borderRadius: 2,
         overflow: "hidden",
-        background: "#0F172A",
+        background: "rgba(255,255,255,.90)",
       }}
     >
       <Box
@@ -48,8 +54,12 @@ export default function Sidebar({
           variant="h6"
           sx={{
             fontWeight: 700,
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
           }}
         >
+          <NotesRoundedIcon sx={{ color: "#f05d5e", fontSize: 22 }} />
           Notes
         </Typography>
 
@@ -69,7 +79,19 @@ export default function Sidebar({
           p: 2,
         }}
       >
-        {notes.length === 0 ? (
+        {loading ? (
+          <Box sx={{ mt: 1 }}>
+            <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+              <CircularProgress size={25} thickness={4} sx={{ color: "#f05d5e" }} />
+            </Box>
+            {[1, 2, 3, 4].map((item) => (
+              <Box key={item} sx={{ mb: 1.5, p: 2, borderRadius: 1.5, border: "1px solid #e8f0ea" }}>
+                <Skeleton animation="wave" variant="text" width="72%" height={24} sx={{ bgcolor: "rgba(8,166,166,.12)" }} />
+                <Skeleton animation="wave" variant="text" width="38%" height={18} sx={{ bgcolor: "rgba(240,93,94,.10)" }} />
+              </Box>
+            ))}
+          </Box>
+        ) : notes.length === 0 ? (
           <Typography
             sx={{
               color: "text.secondary",

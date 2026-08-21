@@ -5,14 +5,13 @@ import {
   Button,
   Box,
   IconButton,
-  Tooltip,
 } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
+
 import InputBase from "@mui/material/InputBase";
 
 interface NavbarProps {
@@ -31,10 +30,10 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
       position="fixed"
       elevation={0}
       sx={{
-        background: "rgba(2, 6, 23, 0.75)",
+        background: "rgba(255, 255, 255, 0.86)",
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: "1px solid #e2ebe5",
         boxShadow: "none",
       }}
     >
@@ -42,7 +41,7 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
         sx={{
           minHeight: "72px !important",
           px: {
-            xs: 2,
+            xs: 1.5,
             md: 4,
           },
           display: "flex",
@@ -78,7 +77,7 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
                 height: 42,
                 borderRadius: 2,
                 background:
-                  "linear-gradient(135deg,#6366F1,#22C55E)",
+                  "linear-gradient(135deg,#f05d5e,#08a6a6)",
 
                 display: "flex",
                 justifyContent: "center",
@@ -90,8 +89,15 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
 
                 fontSize: 18,
 
+                animation: "logoPulse 3s ease-in-out infinite",
+
+                "@keyframes logoPulse": {
+                  "0%, 100%": { boxShadow: "0 0 0 0 rgba(240,93,94,.22)" },
+                  "50%": { boxShadow: "0 0 0 8px rgba(8,166,166,0)" },
+                },
+
                 boxShadow:
-                  "0 0 24px rgba(99,102,241,.35)",
+                  "0 0 24px rgba(240,93,94,.24)",
 
                 cursor: isMobile ? "pointer" : "default",
               }}
@@ -106,6 +112,7 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
               sx={{
                 fontWeight: 700,
                 lineHeight: 1.1,
+                color: "#172b3a",
               }}
             >
               AI Notes
@@ -115,6 +122,7 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
               variant="caption"
               sx={{
                 color: "text.secondary",
+                display: { xs: "none", sm: "block" },
               }}
             >
               Local First AI Workspace
@@ -134,17 +142,17 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
             px: 2,
             py: 1,
             borderRadius: "999px",
-            background: "rgba(255,255,255,0.04)",
-            border: "1px solid rgba(255,255,255,0.08)",
+            background: "#f4f8f4",
+            border: "1px solid #dbe8df",
             transition: "0.25s",
 
             "&:hover": {
-              background: "rgba(255,255,255,0.06)",
+              background: "#ffffff",
             },
 
             "&:focus-within": {
-              border: "1px solid #6366F1",
-              boxShadow: "0 0 0 3px rgba(99,102,241,.15)",
+              border: "1px solid #08a6a6",
+              boxShadow: "0 0 0 3px rgba(8,166,166,.13)",
             },
           }}
         >
@@ -161,11 +169,11 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
             placeholder="Search notes..."
             sx={{
               flex: 1,
-              color: "#fff",
+              color: "#172b3a",
               fontSize: 14,
 
               "& input::placeholder": {
-                color: "#94A3B8",
+                color: "#7b8b92",
                 opacity: 1,
               },
             }}
@@ -181,23 +189,6 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
             ml: 3,
           }}
         >
-          <Tooltip title="AI Features Coming Soon">
-            <IconButton
-              sx={{
-                width: 42,
-                height: 42,
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-
-                "&:hover": {
-                  background: "rgba(99,102,241,0.15)",
-                },
-              }}
-            >
-              <AutoAwesomeRoundedIcon />
-            </IconButton>
-          </Tooltip>
-
           <Button
             variant="contained"
             startIcon={!isMobile ? <AddRoundedIcon /> : undefined}
@@ -210,11 +201,11 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
               borderRadius: 999,
 
               background:
-                "linear-gradient(90deg,#6366F1,#22C55E)",
+                "linear-gradient(90deg,#f05d5e,#08a6a6)",
 
               "&:hover": {
                 background:
-                  "linear-gradient(90deg,#5B5CF6,#16A34A)",
+                  "linear-gradient(90deg,#e74b59,#078f91)",
               },
             }}
           >

@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
+import NoteAltRoundedIcon from "@mui/icons-material/NoteAltRounded";
 
 interface EmptyStateProps {
   onCreateNote: () => void;
@@ -26,7 +26,7 @@ export default function EmptyState({
         justifyContent: "center",
         alignItems: "center",
         background:
-          "linear-gradient(180deg,#111827 0%,#0F172A 100%)",
+          "linear-gradient(145deg,#ffffff 0%,#f0faf5 100%)",
       }}
     >
       <Box
@@ -49,13 +49,20 @@ export default function EmptyState({
             alignItems: "center",
 
             background:
-              "linear-gradient(135deg,#6366F1,#22C55E)",
+              "linear-gradient(135deg,#f05d5e,#08a6a6)",
 
             boxShadow:
-              "0 20px 50px rgba(99,102,241,.30)",
+              "0 20px 50px rgba(240,93,94,.24)",
+
+            animation: "emptyFloat 4s ease-in-out infinite",
+
+            "@keyframes emptyFloat": {
+              "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+              "50%": { transform: "translateY(-8px) rotate(3deg)" },
+            },
           }}
         >
-          <DescriptionRoundedIcon
+          <NoteAltRoundedIcon
             sx={{
               fontSize: 42,
               color: "#fff",
@@ -95,11 +102,11 @@ export default function EmptyState({
             borderRadius: 999,
 
             background:
-              "linear-gradient(90deg,#6366F1,#22C55E)",
+                "linear-gradient(90deg,#f05d5e,#08a6a6)",
 
             "&:hover": {
               background:
-                "linear-gradient(90deg,#5B5CF6,#16A34A)",
+                "linear-gradient(90deg,#e74b59,#078f91)",
             },
           }}
         >

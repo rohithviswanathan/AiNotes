@@ -2,32 +2,33 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
 
     primary: {
-      main: "#6366F1",
+      main: "#f05d5e",
+      contrastText: "#ffffff",
     },
 
     secondary: {
-      main: "#22C55E",
+      main: "#08a6a6",
     },
 
     background: {
-      default: "#020617",
-      paper: "#0F172A",
+      default: "#f7f9f4",
+      paper: "#ffffff",
     },
 
     text: {
-      primary: "#F8FAFC",
-      secondary: "#94A3B8",
+      primary: "#172b3a",
+      secondary: "#637480",
     },
 
-    divider: "rgba(255,255,255,0.08)",
+    divider: "#e2ebe5",
   },
 
   typography: {
     fontFamily:
-      '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+      '"Avenir Next", Avenir, "Segoe UI", sans-serif',
 
     h4: {
       fontWeight: 700,
@@ -64,7 +65,9 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          background: "#020617",
+          background: "#f7f9f4",
+          backgroundImage:
+            "radial-gradient(circle at 5% 0%, rgba(240,93,94,.12), transparent 26%), radial-gradient(circle at 95% 100%, rgba(8,166,166,.12), transparent 30%)",
         },
 
         "*::-webkit-scrollbar": {
@@ -77,12 +80,12 @@ const theme = createTheme({
         },
 
         "*::-webkit-scrollbar-thumb": {
-          background: "#334155",
+          background: "#b9cbc2",
           borderRadius: "999px",
         },
 
         "*::-webkit-scrollbar-thumb:hover": {
-          background: "#475569",
+          background: "#8ba99b",
         },
       },
     },
@@ -91,8 +94,9 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundImage: "none",
-          backgroundColor: "#0F172A",
-          border: "1px solid rgba(255,255,255,.08)",
+          backgroundColor: "rgba(255,255,255,.88)",
+          border: "1px solid #e2ebe5",
+          boxShadow: "0 18px 45px rgba(38, 74, 62, .08)",
         },
       },
     },
@@ -102,16 +106,16 @@ const theme = createTheme({
         root: {
           borderRadius: 14,
 
-          backgroundColor: "rgba(255,255,255,.02)",
+          backgroundColor: "#fbfdfb",
 
           transition: "all .2s",
 
           "&:hover": {
-            backgroundColor: "rgba(255,255,255,.03)",
+            backgroundColor: "#ffffff",
           },
 
           "&.Mui-focused": {
-            backgroundColor: "rgba(255,255,255,.04)",
+            backgroundColor: "#ffffff",
           },
         },
       },
@@ -145,16 +149,16 @@ const theme = createTheme({
           transition: ".2s",
 
           "&:hover": {
-            backgroundColor: "rgba(99,102,241,.12)",
+            backgroundColor: "rgba(8,166,166,.10)",
           },
 
           "&.Mui-selected": {
             background:
-              "linear-gradient(90deg, rgba(99,102,241,.18), rgba(34,197,94,.10))",
+              "linear-gradient(90deg, rgba(240,93,94,.14), rgba(8,166,166,.12))",
 
             "&:hover": {
               background:
-                "linear-gradient(90deg, rgba(99,102,241,.22), rgba(34,197,94,.14))",
+                "linear-gradient(90deg, rgba(240,93,94,.20), rgba(8,166,166,.16))",
             },
           },
         },
