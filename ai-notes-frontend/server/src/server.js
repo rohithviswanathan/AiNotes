@@ -5,7 +5,7 @@ const db = require("./database");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-3.6-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
 
 const app = express();
 
@@ -14,7 +14,14 @@ app.use(express.json());
 
 // Health check
 app.get("/", (req, res) => {
-  res.send("Backend is running 🚀");
+  res.send("AI Notes backend is running 🚀");
+});
+
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    message: "AI Notes backend is running"
+  });
 });
 
 // Get all notes
@@ -100,15 +107,16 @@ app.delete("/notes/:id", (req, res) => {
 });
 
 const PROMPTS = {
-  summarize: (content) => `Summarize the following note concisely:\n\n${content}`,
-  rewrite: (content) => `Rewrite the following note more clearly and concisely:\n\n${content}`,
+  summarize: (content) => `Summarize the following note concisely. Return only the summary:\n\n${content}`,
+  rewrite: (content) => `Rewrite the following note more clearly and concisely and correct any errors in note as well. Return only the rewritten text:\n\n${content}`,
   improve: (content) => `Improve the grammar, style, and clarity of the following note. Return only the improved text:\n\n${content}`,
-  translate: (content) => `Translate the following note to English. Return only the translated text:\n\n${content}`,
+  translate: (content, language = "Hindi") => `Translate the following note to ${language}. Return only the translated text:\n\n${content}`,
   generateTitle: (content) => `Generate a short, descriptive title (max 8 words) for the following note. Return only the title, no quotes:\n\n${content}`,
+  enhance: (content) => `Enhance the following note by expanding ideas, adding relevant details, and making it more comprehensive. Return only the enhanced text:\n\n${content}`,
 };
 
 app.post("/ai", async (req, res) => {
-  const { action, content } = req.body;
+  const { action, content, language } = req.body;
 
   if (!PROMPTS[action]) {
     return res.status(400).json({ error: "Invalid action" });
@@ -119,13 +127,15 @@ app.post("/ai", async (req, res) => {
   }
 
   try {
-    const result = await model.generateContent(PROMPTS[action](content));
+    const result = await model.generateContent(PROMPTS[action](content, language));
     res.json({ result: result.response.text() });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

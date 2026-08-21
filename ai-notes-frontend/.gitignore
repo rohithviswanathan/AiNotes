@@ -25,3 +25,7 @@ dist-ssr
 
 /server/notes.db
 /server/.env
+
+*.db
+*.db-shm
+*.db-wal
