@@ -22,10 +22,6 @@ export default function NoteItem({
   onClick,
   onDelete,
 }: NoteItemProps) {
-  const preview =
-    note.content.length > 80
-      ? note.content.slice(0, 80) + "..."
-      : note.content || "No content";
 
   const date = new Date(note.createdAt).toLocaleDateString(undefined, {
     month: "short",
@@ -97,22 +93,6 @@ export default function NoteItem({
 
       <Typography
         sx={{
-          color: "text.secondary",
-          fontSize: 13,
-          lineHeight: 1.6,
-          minHeight: 42,
-          display: "-webkit-box",
-          overflow: "hidden",
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: "vertical",
-        }}
-      >
-        {preview}
-      </Typography>
-
-      <Typography
-        sx={{
-          mt: 2,
           color: "text.secondary",
           fontSize: 12,
         }}
