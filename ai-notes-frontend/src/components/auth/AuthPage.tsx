@@ -117,7 +117,11 @@ export default function AuthPage({ onAuth }: AuthPageProps) {
             required
             fullWidth
             autoComplete={mode === "login" ? "current-password" : "new-password"}
-            inputProps={{ minLength: 6 }}
+            slotProps={{
+              htmlInput: {
+                minLength: 6,
+              },
+            }}
           />
           <Button
             type="submit"
