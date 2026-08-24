@@ -46,6 +46,7 @@ export default function AuthPage({ onAuth }: AuthPageProps) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        textAlign: "center",
         background: "#f7f9f4",
         backgroundImage:
           "radial-gradient(circle at 5% 0%, rgba(240,93,94,.12), transparent 26%), radial-gradient(circle at 95% 100%, rgba(8,166,166,.12), transparent 30%)",
@@ -54,15 +55,16 @@ export default function AuthPage({ onAuth }: AuthPageProps) {
       <Paper
         sx={{
           width: "100%",
-          maxWidth: 400,
-          p: 4,
-          borderRadius: 4,
+          height: {xs: "100vh", sm: "auto"},
+          maxWidth: 600,
+          p: 6,
+          borderRadius: {xs: 0, sm: 4},
           display: "flex",
           flexDirection: "column",
-          gap: 2.5,
+          gap: 2,
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1, mx: "auto" }}>
           <Box
             sx={{
               width: 42,
@@ -72,6 +74,7 @@ export default function AuthPage({ onAuth }: AuthPageProps) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              textAlign: "center",
               color: "#fff",
               fontWeight: 700,
               fontSize: 18,
@@ -98,7 +101,7 @@ export default function AuthPage({ onAuth }: AuthPageProps) {
         <Box
           component="form"
           onSubmit={handleSubmit}
-          sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+          sx={{ display: "flex", flexDirection: "column", gap: 3, mt: 2 }}
         >
           <TextField
             label="Email"
