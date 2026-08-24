@@ -5,12 +5,14 @@ import {
   Button,
   Box,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
 import InputBase from "@mui/material/InputBase";
 
@@ -19,9 +21,11 @@ interface NavbarProps {
   search: string;
   onSearchChange: (value: string) => void;
   onMenuClick: () => void;
+  userEmail: string;
+  onLogout: () => void;
 }
 
-export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick }: NavbarProps) {
+export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick, userEmail, onLogout }: NavbarProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -189,6 +193,14 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
             ml: 3,
           }}
         >
+          {!isMobile && (
+            <Typography
+              variant="caption"
+              sx={{ color: "text.secondary", maxWidth: 160, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+            >
+              {userEmail}
+            </Typography>
+          )}
           <Button
             variant="contained"
             startIcon={!isMobile ? <AddRoundedIcon /> : undefined}
@@ -197,20 +209,18 @@ export default function Navbar({ onNewNote, search, onSearchChange, onMenuClick 
               minWidth: isMobile ? 48 : "auto",
               px: isMobile ? 0 : 2.5,
               py: 1,
-
               borderRadius: 999,
-
-              background:
-                "linear-gradient(90deg,#f05d5e,#08a6a6)",
-
-              "&:hover": {
-                background:
-                  "linear-gradient(90deg,#e74b59,#078f91)",
-              },
+              background: "linear-gradient(90deg,#f05d5e,#08a6a6)",
+              "&:hover": { background: "linear-gradient(90deg,#e74b59,#078f91)" },
             }}
           >
             {isMobile ? <AddRoundedIcon /> : "New Note"}
           </Button>
+          <Tooltip title="Logout">
+            <IconButton onClick={onLogout} size="small" sx={{ color: "text.secondary" }}>
+              <LogoutRoundedIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
         </Box>
       </Toolbar>
     </AppBar>
